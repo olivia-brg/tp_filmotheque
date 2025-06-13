@@ -6,10 +6,18 @@ public class Avis {
     private String comment;
     private Film film;
 
+    public Avis(long id, int note, String comment) {
+        this.id = id;
+        this.note = note;
+        this.comment = comment;
+    }
+
     public Avis(int note, String comment) {
         this.note = note;
         this.comment = comment;
     }
+
+    public Avis(long id) {}
 
     public long getId() {
         return id;
@@ -44,5 +52,14 @@ public class Avis {
         film.setAvis(this);
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Avis{");
+        sb.append("id=").append(id);
+        sb.append(", note=").append(note);
+        sb.append(", comment='").append(comment).append('\'');
+        sb.append(", film=").append(film);
+        sb.append('}');
+        return sb.toString();
+    }
 }
