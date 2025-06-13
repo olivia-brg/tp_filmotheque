@@ -1,8 +1,13 @@
 package fr.eni.tp_filmotheque.bo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Film {
+public class Film implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private long id;
     private String nom;
     private int annee;
@@ -10,8 +15,13 @@ public class Film {
     private String synopsis;
     private List<Avis> avis;
     private Genre genre;
+    private List<Personne> acteurs;
+    private Personne realisateur;
+
+
 
     public Film(long id, String nom, int annee, int duree, String synopsis) {
+        this();
         this.id = id;
         this.nom = nom;
         this.annee = annee;
@@ -20,13 +30,17 @@ public class Film {
     }
 
     public Film(String nom, int annee, int duree, String synopsis) {
+        this();
         this.nom = nom;
         this.annee = annee;
         this.duree = duree;
         this.synopsis = synopsis;
     }
 
-    public Film() {}
+    public Film() {
+        acteurs = new ArrayList<>();
+        avis = new ArrayList<>();
+    }
 
     public long getId() {
         return id;
@@ -85,21 +99,56 @@ public class Film {
         this.genre = genre;
     }
 
-    public void setAvis(List<Avis> avis) {
-        this.avis = avis;
+
+
+    public List<Personne> getActeurs() {
+        return acteurs;
+    }
+
+    public void setActeurs(Personne acteur) {
+        this.acteurs.add(acteur);
+    }
+
+    public Personne getRealisateur() {
+        return realisateur;
+    }
+
+    public void setRealisateur(Personne realisateur) {
+        this.realisateur = realisateur;
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Film{");
-        sb.append("id=").append(id);
-        sb.append(", nom='").append(nom).append('\'');
-        sb.append(", annee=").append(annee);
-        sb.append(", duree=").append(duree);
-        sb.append(", synopsis='").append(synopsis).append('\'');
-        sb.append(", avis=").append(avis);
-        sb.append(", genre=").append(genre);
-        sb.append('}');
-        return sb.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Film (");
+        builder.append(id);
+        builder.append(")\n\ttitre : ");
+        builder.append(nom);
+        builder.append("[annee : ");
+        builder.append(annee);
+        builder.append(", duree : ");
+        builder.append(duree);
+        builder.append(" minutes]\n\tSynopsis : ");
+        builder.append(synopsis);
+        builder.append("\n\trealisateur : ");
+        builder.append(realisateur);
+        builder.append("\n\tacteurs : ");
+        builder.append(acteurs);
+        builder.append("\n\tgenre : ");
+        builder.append(genre);
+        builder.append("\n\tAvis : ");
+        builder.append(avis);
+        return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Film film)) return false;
+        return id == film.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

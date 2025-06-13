@@ -1,6 +1,11 @@
 package fr.eni.tp_filmotheque.bo;
 
-public abstract class Personne {
+import java.io.Serializable;
+import java.util.Objects;
+
+public abstract class Personne implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private long id;
     private String nom;
     private String prenom;
@@ -18,13 +23,52 @@ public abstract class Personne {
 
     public Personne() {}
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Personne{");
-        sb.append("id=").append(id);
-        sb.append(", nom='").append(nom).append('\'');
-        sb.append(", prenom='").append(prenom).append('\'');
-        sb.append('}');
-        return sb.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append(prenom);
+        builder.append(" ");
+        builder.append(nom);
+        builder.append(" (");
+        builder.append(id);
+        builder.append(") ");
+        return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Personne personne)) return false;
+        return id == personne.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
 }

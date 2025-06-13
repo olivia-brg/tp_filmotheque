@@ -1,16 +1,20 @@
 package fr.eni.tp_filmotheque.bo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class Genre {
+public class Genre implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private long id;
     private String titre;
-    private List<Film> films;
+    private List<Film> films =  new ArrayList<Film>();
 
-    public Genre(long id, String titre, List<Film> films) {
+    public Genre(long id, String titre) {
         this.id = id;
         this.titre = titre;
-        this.films = films;
     }
 
     public Genre(String titre) {
@@ -46,11 +50,23 @@ public class Genre {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Genre{");
-        sb.append("id=").append(id);
-        sb.append(", titre='").append(titre).append('\'');
-        sb.append(", films=").append(films);
-        sb.append('}');
-        return sb.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append(titre);
+        builder.append(" (");
+        builder.append(id);
+        builder.append(")");
+        return builder.toString();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Genre genre)) return false;
+        return id == genre.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
