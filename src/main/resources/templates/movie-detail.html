@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
+                                                       contenuPage=~{:: .center-main},
+                                                       ressourcesSupp=~{})}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${film.getNom()}">Détail</title>
+</head>
+<body>
+<main class="center-main">
+
+    <h1>Détail du film</h1>
+    <ul class="flex-outer">
+        <li id="genre">
+            <label for="genre" th:text="'Genre : ' + ${film.getGenre().getTitre()}" />
+        </li>
+        <li id="annee">
+            <label for="annee" th:text="'Année : ' + ${film.getAnnee()}" />
+        </li>
+        <li id="nom">
+            <label for="nom" th:text="'Titre : ' + ${film.getNom()}" />
+        <li id="real">
+            <label for="real" th:text="'Réalisateur : ' + ${film.getRealisateur().getPrenom()} + ' ' + ${film.getRealisateur().getNom()}" />
+        <li id="duree">
+            <label for="duree" th:text="'Durée : ' + ${film.getDuree()}" />
+        <li id="acteur">
+            <label for="acteur">Acteurs : </label>
+            <li th:each="acteur: ${film.getActeurs()}" th:text="${acteur.getPrenom() + ' ' + acteur.getNom()}" />
+        <li id="synopsis">
+            <label for="synopsis" th:text="'Synopsis : ' + ${film.getSynopsis()}" />
+    </ul>
+
+</main>
+
+</body>
+</html>
