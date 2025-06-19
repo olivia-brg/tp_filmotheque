@@ -9,6 +9,7 @@ body {
 
 header {
 	padding: 5px;
+	background-color: #707070;
 }
 
 h1 {
@@ -16,13 +17,13 @@ h1 {
 }
 
 footer {
-	background-color: #777;
+	background-color: #707070;
 	padding: 10px;
 	text-align: center;
 	color: white;
 	height: auto;
 }
 
-nav li {
+nav li {	
 	font-size: 1.5em;
 }

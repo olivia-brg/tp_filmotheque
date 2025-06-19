@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -30,22 +31,19 @@ public class ContexteController {
 
     @GetMapping("/session")
     public String connexion(@ModelAttribute("membreSession") Membre membreSession,
-                            @RequestParam(name = "email", defaultValue = "jtrillard@campus-eni.fr") String email,
+                            @RequestParam(name = "email", defaultValue = "") String email,
                             Model model) {
-        System.out.println("connexion de " + email);
-        Membre membre= contexteService.charger(email);
-        model.addAttribute("membreSession", membre);
-        System.out.println("model : " + model.getAttribute("membreSession"));
+        Membre membre = contexteService.charger(email);
+        model.addAttribute("membreSession", Objects.requireNonNullElseGet(membre, Membre::new));
         return "redirect:/films";
     }
 
     @ModelAttribute("membreSession")
     public Membre addAttributSession() {
-        System.out.println("Add Attribut Session");
-        return null;
+        return new Membre();
     }
 
-    @GetMapping("/invalidate")
+    @GetMapping("/cloture")
     public String finSession(SessionStatus status) {
         status.setComplete();
         return "redirect:/contextes"; // Redirection

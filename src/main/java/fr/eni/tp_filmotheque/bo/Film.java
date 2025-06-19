@@ -6,138 +6,151 @@ import java.util.List;
 import java.util.Objects;
 
 public class Film implements Serializable {
+	/**
+	 * Numéro de sérialisation
+	 */
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String titre;
+	private int annee;
+	private int duree;
+	private String synopsis;
+	private Participant realisateur;
+	private List<Participant> acteurs;
+	private Genre genre;
+	private List<fr.eni.tp_filmotheque.bo.Avis> avis;
 
-    private static final long serialVersionUID = 1L;
-    private long id;
-    private String nom;
-    private int annee;
-    private int duree;
-    private String synopsis;
-    private List<Avis> avis;
-    private Genre genre;
-    private List<Personne> acteurs;
-    private Personne realisateur;
+	public Film() {
+		acteurs = new ArrayList<>();
+		avis = new ArrayList<>();
+	}
 
+	public Film(String titre, int annee, int duree, String synopsis) {
+		this();
+		this.titre = titre;
+		this.annee = annee;
+		this.duree = duree;
+		this.synopsis = synopsis;
+		acteurs = new ArrayList<>();
+		avis = new ArrayList<>();
+	}
 
+	public Film(long id, String titre, int annee, int duree, String synopsis) {
+		this(titre, annee, duree, synopsis);
+		this.id = id;
+	}
 
-    public Film(long id, String nom, int annee, int duree, String synopsis) {
-        this();
-        this.id = id;
-        this.nom = nom;
-        this.annee = annee;
-        this.duree = duree;
-        this.synopsis = synopsis;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public Film(String nom, int annee, int duree, String synopsis) {
-        this();
-        this.nom = nom;
-        this.annee = annee;
-        this.duree = duree;
-        this.synopsis = synopsis;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public Film() {
-        acteurs = new ArrayList<>();
-        avis = new ArrayList<>();
-    }
+	public String getTitre() {
+		return titre;
+	}
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
-    public String getNom() {
-        return nom;
-    }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public int getAnnee() {
+		return annee;
+	}
 
-    public int getAnnee() {
-        return annee;
-    }
-    public void setAnnee(int annee) {
-        this.annee = annee;
-    }
+	public void setAnnee(int annee) {
+		this.annee = annee;
+	}
 
-    public int getDuree() {
-        return duree;
-    }
-    public void setDuree(int duree) {
-        this.duree = duree;
-    }
+	public int getDuree() {
+		return duree;
+	}
 
-    public String getSynopsis() {
-        return synopsis;
-    }
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
 
-    public List<Avis> getAvis() {
-        return avis;
-    }
-    public void setAvis(Avis avis) {
-        this.avis.add(avis);
-        avis.setFilm(this);
-    }
+	public String getSynopsis() {
+		return synopsis;
+	}
 
-    public Genre getGenre() {
-        return genre;
-    }
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
 
-    public List<Personne> getActeurs() {
-        return acteurs;
-    }
-    public void setActeurs(Personne acteur) {
-        this.acteurs.add(acteur);
-    }
+	public Participant getRealisateur() {
+		return realisateur;
+	}
 
-    public Personne getRealisateur() {
-        return realisateur;
-    }
-    public void setRealisateur(Personne realisateur) {
-        this.realisateur = realisateur;
-    }
+	public void setRealisateur(Participant realisateur) {
+		this.realisateur = realisateur;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Film (");
-        builder.append(id);
-        builder.append(")\n\ttitre : ");
-        builder.append(nom);
-        builder.append("[annee : ");
-        builder.append(annee);
-        builder.append(", duree : ");
-        builder.append(duree);
-        builder.append(" minutes]\n\tSynopsis : ");
-        builder.append(synopsis);
-        builder.append("\n\trealisateur : ");
-        builder.append(realisateur);
-        builder.append("\n\tacteurs : ");
-        builder.append(acteurs);
-        builder.append("\n\tgenre : ");
-        builder.append(genre);
-        builder.append("\n\tAvis : ");
-        builder.append(avis);
-        return builder.toString();
-    }
+	public List<Participant> getActeurs() {
+		return acteurs;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Film film)) return false;
-        return id == film.id;
-    }
+	public void setActeurs(List<Participant> acteurs) {
+		this.acteurs = acteurs;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	public List<Avis> getAvis() {
+		return avis;
+	}
+
+	public void setAvis(Avis avis) {
+		this.avis.add(avis);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Film (");
+		builder.append(id);
+		builder.append(")\n\ttitre : ");
+		builder.append(titre);
+		builder.append("[annee : ");
+		builder.append(annee);
+		builder.append(", duree : ");
+		builder.append(duree);
+		builder.append(" minutes]\n\tSynopsis : ");
+		builder.append(synopsis);
+		builder.append("\n\trealisateur : ");
+		builder.append(realisateur);
+		builder.append("\n\tacteurs : ");
+		builder.append(acteurs);
+		builder.append("\n\tgenre : ");
+		builder.append(genre);
+		builder.append("\n\tAvis : ");
+		builder.append(avis);
+		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		return id == other.id;
+	}
+
 }

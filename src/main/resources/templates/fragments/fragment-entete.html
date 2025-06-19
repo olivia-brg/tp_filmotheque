@@ -1,9 +1,11 @@
 <header xmlns:th="http://www.thymeleaf.org" data-th-fragment="frag-entete">
-  <nav>
   <h1 id="nav-title">
-    <a href="/">Filmothèque</a>
-    <p th:text="${membreSession != null} ? ${membreSession.prenom} : ''"></p>
+    <a href="/">Filmothèque</a><img data-th-src="@{../static/images/logoFilmotheque.png}" alt="">
+    <th:block th:if="${membreSession != null && membreSession.id != 0}">
+    <p th:text="${ '[' + membreSession.prenom + ']' }"></p>
+    </th:block>
   </h1>
+  <nav>
     <ul>
       <li><a href="/films">Films</a></li>
       <li><a href="/films/creer">Créer</a></li>

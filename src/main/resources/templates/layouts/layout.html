@@ -8,8 +8,8 @@
     <!-- Rendre variable le titre de la page -->
     <title data-th-replace="${titrePage}">Demo Spring Web</title>
 
+    <link data-th-href="@{/css/general.css}" rel="stylesheet">
     <link data-th-href="@{/css/layout.css}" rel="stylesheet">
-    <link data-th-href="@{/css/style.css}" rel="stylesheet">
 
     <!-- Permettre d’ajouter ou non des ressources CSS -->
     <th:block data-th-replace="${ressourcesSupp} ?: ~{}"></th:block>

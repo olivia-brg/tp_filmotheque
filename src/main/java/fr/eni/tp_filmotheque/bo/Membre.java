@@ -1,88 +1,63 @@
 package fr.eni.tp_filmotheque.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Membre extends Personne {
+	/**
+	 * Numéro de sérialisation
+	 */
+	private static final long serialVersionUID = 1L;
+	private String pseudo;
+	private String motDePasse;
+	private boolean admin;
 
-    private static final long serialVersionUID = 1L;
-    private String pseudo;
-    private String motDePasse;
-    private boolean admin;
-    private List<Avis> avis = new ArrayList<Avis>();
+	public Membre() {
+	}
 
-    public String getPseudo() {
-        return pseudo;
-    }
+	public Membre(String nom, String prenom, String pseudo, String motDePasse) {
+		super(nom, prenom);
+		this.pseudo = pseudo;
+		this.motDePasse = motDePasse;
+	}
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
+	public Membre(long id, String nom, String prenom, String pseudo, String motDePasse) {
+		super(id, nom, prenom);
+		this.pseudo = pseudo;
+		this.motDePasse = motDePasse;
+	}
 
-    public String getMotDePasse() {
-        return motDePasse;
-    }
+	public String getPseudo() {
+		return pseudo;
+	}
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
 
-    public boolean isAdmin() {
-        return admin;
-    }
+	public String getMotDePasse() {
+		return motDePasse;
+	}
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
 
-    public List<Avis> getAvis() {
-        return avis;
-    }
+	public boolean isAdmin() {
+		return admin;
+	}
 
-    public void setAvis(Avis avis) {
-        this.avis.add(avis);
-        avis.setMembre(this);
-    }
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
-    public Membre(long id, String nom, String prenom, String pseudo, String motDePasse) {
-        super(id, nom, prenom);
-        this.pseudo = pseudo;
-        this.motDePasse = motDePasse;
-        this.admin = false;
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString());
+		builder.append(" - Membre (pseudo=");
+		builder.append(pseudo);
+		builder.append(", admin=");
+		builder.append(admin);
+		builder.append(") ");
+		return builder.toString();
+	}
 
-    public Membre(String nom, String prenom, String pseudo, String motDePasse) {
-        super(nom, prenom);
-        this.pseudo = pseudo;
-        this.motDePasse = motDePasse;
-        this.admin = false;
-    }
-
-    public Membre(String pseudo, String motDePasse) {
-        this.pseudo = pseudo;
-        this.motDePasse = motDePasse;
-        this.admin = false;
-    }
-
-    public Membre(long id, String nom, String prenom, String pseudo) {
-        super(id, nom, prenom);
-    }
-
-    public Membre(String nom, String prenom, String pseudo) {
-        super(nom, prenom);
-    }
-
-    public Membre(String pseudo) {}
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(super.toString());
-        builder.append(" - Membre (pseudo=");
-        builder.append(pseudo);
-        builder.append(", admin=");
-        builder.append(admin);
-        builder.append(") ");
-        return builder.toString();
-    }
 }

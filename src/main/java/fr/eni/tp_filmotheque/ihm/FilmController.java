@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping({ "/","/films" })
-@SessionAttributes("genresEnSession")
+@SessionAttributes({"genresEnSession", "membreSession"})
 public class FilmController {
     FilmService filmService;
 

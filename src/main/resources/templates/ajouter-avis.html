@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- Mise en place du layout -->
+<html data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
+                                                            contenuPage=~{:: .center-main},
+                                                            ressourcesSupp=~{})}" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Avis</title>
+</head>
+<body>
+
+<main class="center-main">
+    <form data-th-fragment="frag-ajout-avis" method="post" th:action="@{/avis/creer/(idFilm=${film.id})}" th:object="${avis}">
+        <label for="note">Note</label>
+        <input th:field="*{note}" type="text"/><br>
+        <label for="comment">Commentaire</label>
+        <input th:field="*{comment}" type="text"><br>
+        <button>Enregistrer</button>
+    </form>
+
+</body>
+</html>

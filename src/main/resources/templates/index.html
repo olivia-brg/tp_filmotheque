@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Mise en place du layout -->
-<html data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
                                                        contenuPage=~{:: .center-main},
                                                        ressourcesSupp=~{})}"
 >
@@ -19,13 +19,16 @@
             <th>Réalisateur</th>
             <th>Action</th>
         </tr>
-        <tr data-th-each="film: ${films}">
-            <td data-th-text="${film.genre}"/>
-            <td data-th-text="${film.annee}"/>
-            <td data-th-text="${film.nom}"/>
+        <tr data-th-each="film: ${films}" th:object="${film}" >
+            <td data-th-text="*{genre}"/>
+            <td data-th-text="*{annee}"/>
+            <td data-th-text="*{titre}"/>
             <td data-th-text="${film.realisateur.prenom} + ' ' + ${film.realisateur.nom}"/>
             <td>
                 <a data-th-href="@{./films/detail(id=${film.id})}">Détails</a>
+                <th:block th:if="${membreSession != null && membreSession.id > 0}">
+                    <a data-th-href="@{./avis/creer(idFilm=${film.id})}">Avis</a>
+                </th:block>
             </td>
         </tr>
     </table>

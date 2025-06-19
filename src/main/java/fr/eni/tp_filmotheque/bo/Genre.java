@@ -1,72 +1,75 @@
 package fr.eni.tp_filmotheque.bo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Genre implements Serializable {
+	/**
+	 * Numéro de sérialisation
+	 */
+	private static final long serialVersionUID = 1L;
+	//Attributs
+	private long id;
+	private String titre;
 
-    private static final long serialVersionUID = 1L;
-    private long id;
-    private String titre;
-    private List<Film> films =  new ArrayList<Film>();
+	//Default Constructor
+	public Genre() {
+	}
 
-    public Genre(long id, String titre) {
-        this.id = id;
-        this.titre = titre;
-    }
+	//Constructeurs avec paramètres
+	public Genre(String titre) {
+		this.titre = titre;
+	}
 
-    public Genre(String titre) {
-        this.titre = titre;
-    }
+	public Genre(long id, String titre) {
+		this.id = id;
+		this.titre = titre;
+	}
+	
+	//Getter + Setter
+	public long getId() {
+		return id;
+	}
 
-    public Genre() {}
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getTitre() {
+		return titre;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
-    public String getTitre() {
-        return titre;
-    }
+	//Equals et hashCode pour comparer 2 instances de la classe selon leur 'id'
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Genre other = (Genre) obj;
+		return id == other.id;
+	}
 
-    public List<Film> getFilms() {
-        return films;
-    }
+	//Auto-génération du toString pour uniformiser les traces
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(titre);
+		builder.append(" (");
+		builder.append(id);
+		builder.append(")");
+		return builder.toString();
+	}
 
-    public void setFilms(Film film) {
-        this.films.add(film);
-        film.setGenre(this);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(titre);
-        builder.append(" (");
-        builder.append(id);
-        builder.append(")");
-        return builder.toString();
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Genre genre)) return false;
-        return id == genre.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }

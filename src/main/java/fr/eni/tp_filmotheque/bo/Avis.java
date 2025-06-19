@@ -1,104 +1,94 @@
 package fr.eni.tp_filmotheque.bo;
 
+import fr.eni.tp_filmotheque.bo.Membre;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Avis implements Serializable {
+public class Avis implements Serializable {/**
+	 * Numéro de sérialisation
+	 */
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private int note;
+	private String commentaire;
+	private Membre membre;
 
-    private static final long serialVersionUID = 1L;
-    private long id;
-    private int note;
-    private String comment;
-    private Film film;
-    private Membre membre;
+	public Avis() {
+	}
 
-    public Avis(long id, int note, String comment, Film film, Membre membre) {
-        this.id = id;
-        this.note = note;
-        this.comment = comment;
-        this.film = film;
-        this.membre = membre;
-    }
+	public Avis(int note, String commentaire, Membre membre) {
+		this.note = note;
+		this.commentaire = commentaire;
+		this.membre = membre;
+	}
 
-    public Avis(long id, int note, String comment, Membre membre) {
-        this.id = id;
-        this.note = note;
-        this.comment = comment;
-        this.membre = membre;
-    }
+	public Avis(long id, int note, String commentaire, Membre membre) {
+		this.id = id;
+		this.note = note;
+		this.commentaire = commentaire;
+		this.membre = membre;
+	}
 
-    public Avis(int note, String comment, Film film, Membre membre) {
-        this.note = note;
-        this.comment = comment;
-        this.film = film;
-        this.membre = membre;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public Avis() {
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public int getNote() {
+		return note;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setNote(int note) {
+		this.note = note;
+	}
 
-    public int getNote() {
-        return note;
-    }
+	public String getCommentaire() {
+		return commentaire;
+	}
 
-    public void setNote(int note) {
-        this.note = note;
-    }
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
 
-    public String getComment() {
-        return comment;
-    }
+	public Membre getMembre() {
+		return membre;
+	}
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+	public void setMembre(Membre membre) {
+		this.membre = membre;
+	}
 
-    public Film getFilm() {
-        return film;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-    public void setFilm(Film film) {
-        this.film = film;
-        film.setAvis(this);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Avis other = (Avis) obj;
+		return id == other.id;
+	}
 
-    public Membre getMembre() {
-        return membre;
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Avis de ");
+		builder.append(membre);
+		builder.append(" - note=");
+		builder.append(note);
+		builder.append(", commentaire=");
+		builder.append(commentaire);
+		return builder.toString();
+	}
 
-    public void setMembre(Membre membre) {
-        this.membre = membre;
-        membre.setAvis(this);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Avis de ");
-        builder.append(membre);
-        builder.append(" - note=");
-        builder.append(note);
-        builder.append(", commentaire=");
-        builder.append(comment);
-        return builder.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Avis avis)) return false;
-        return id == avis.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }

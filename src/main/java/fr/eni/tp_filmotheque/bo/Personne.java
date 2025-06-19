@@ -4,71 +4,78 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Personne implements Serializable {
+	/**
+	 * Numéro de sérialisation
+	 */
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String nom;
+	private String prenom;
 
-    private static final long serialVersionUID = 1L;
-    private long id;
-    private String nom;
-    private String prenom;
+	public Personne() {
+	}
 
-    public Personne(long id, String nom, String prenom) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-    }
+	public Personne(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+	}
 
-    public Personne(String nom, String prenom) {
-        this.nom = nom;
-        this.prenom = prenom;
-    }
+	public Personne(long id, String nom, String prenom) {
+		this(nom, prenom);// Appel du constructeur précédent
+		this.id = id;
+	}
 
-    public Personne() {}
+	public long getId() {
+		return id;
+	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public String getPrenom() {
+		return prenom;
+	}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 
-    public String getPrenom() {
-        return prenom;
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(prenom);
+		builder.append(" ");
+		builder.append(nom);
+		builder.append(" (");
+		builder.append(id);
+		builder.append(") ");
+		return builder.toString();
+	}
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(prenom);
-        builder.append(" ");
-        builder.append(nom);
-        builder.append(" (");
-        builder.append(id);
-        builder.append(") ");
-        return builder.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Personne personne)) return false;
-        return id == personne.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personne other = (Personne) obj;
+		return id == other.id;
+	}
 
 }
