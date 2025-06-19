@@ -1,0 +1,49 @@
+<form action="/films/detail" data-th-fragment="frag-form-film" method="post">
+    <h1>Détail du film</h1>
+    <ul class="flex-outer">
+        <li>
+            <label for="inputGenre">Genre : </label>
+            <input data-th-value="${film.genre.titre}" id="inputGenre" name="genre" required type="text">
+        </li>
+
+        <li>
+            <label for="inputAnnee">Année : </label>
+            <input data-th-value="${film.annee}" id="inputAnnee" name="annee" required type="number">
+        </li>
+
+        <li>
+            <label for="inputNom">Titre : </label>
+            <input data-th-value="${film.nom}" id="inputNom" name="nom" required type="text">
+        </li>
+
+        <li>
+            <label for="inputReal">Réalisateur : </label>
+            <input data-th-value="${film.realisateur.prenom} + ' ' + ${film.realisateur.nom}" id="inputReal" name="real"
+                   required
+                   type="text">
+        </li>
+
+        <li>
+            <label for="inputDuree">Durée : </label>
+            <input data-th-value="${film.duree}" id="inputDuree" name="duree" required type="text">
+        </li>
+
+        <li>
+            <label for="inputActeur">Acteurs : </label>
+            <select multiple>
+                <option data-th-each="acteur:${film.acteurs}" data-th-text="${'- ' + acteur.prenom + ' ' + acteur.nom}"
+                        id="inputActeur" name="acteur">
+            </select>
+
+        </li>
+
+        <li>
+            <label for="inputSynopsis">Synopsis : </label>
+            <input data-th-value="${film.synopsis}" id="inputSynopsis" name="synopsis" required type="text">
+        </li>
+
+        <li>
+            <button type="submit">Enregistrer</button>
+        </li>
+    </ul>
+</form>

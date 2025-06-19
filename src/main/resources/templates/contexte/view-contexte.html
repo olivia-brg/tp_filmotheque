@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- Mise en place du layout -->
+<html data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
+                                                       contenuPage=~{:: .center-main},
+                                                       ressourcesSupp=~{})}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Contextes</title>
+    <th:block id="ressources-css">
+        <link data-th-href="@{/css/tp-contexte.css}" rel="stylesheet">
+    </th:block>
+</head>
+<body>
+
+<main class="center-main">
+
+    <th:block th:if="${membreSession == null}">
+        <a data-th-href="@{/contextes/session(email='jtrillard@campus-eni.fr')}">Julien Trillard</a>
+        <a data-th-href="@{/contextes/session(email='abaille@campus-eni.fr')}">Anne-Lise Baille</a>
+        <a data-th-href="@{/contextes/session(email='sgobin@campus-eni.fr')}">Stéphane Gobin</a>
+    </th:block>
+    <th:block th:unless="${membreSession == null}">
+        <a href="/contextes/invalidate">Déconnecter</a>
+    </th:block>
+
+
+</main>
+</body>
+</html>

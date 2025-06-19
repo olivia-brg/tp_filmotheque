@@ -2,9 +2,12 @@
   <nav>
   <h1 id="nav-title">
     <a href="/">Filmothèque</a>
+    <p th:text="${membreSession != null} ? ${membreSession.prenom} : ''"></p>
   </h1>
     <ul>
       <li><a href="/films">Films</a></li>
+      <li><a href="/films/creer">Créer</a></li>
+      <li><a href="/contextes">Contextes</a></li>
     </ul>
   </nav>
 </header>

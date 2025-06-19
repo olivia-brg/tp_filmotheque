@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!-- Mise en place du layout -->
-<html xmlns:th="http://www.thymeleaf.org"
-      data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
+<html data-th-replace="~{layouts/layout :: layout-demo(titrePage=~{:: title},
                                                        contenuPage=~{:: .center-main},
-                                                       ressourcesSupp=~{})}">
+                                                       ressourcesSupp=~{})}"
+>
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
@@ -11,24 +11,25 @@
 <body>
 
 <main class="center-main">
-<table>
-    <tr>
-        <th>Genre</th>
-        <th>Année</th>
-        <th>Titre</th>
-        <th>Réalisateur</th>
-        <th>Action</th>
-    </tr>
-    <tr th:each="film: ${films}" >
-        <td th:text="${film.getGenre()}" />
-        <td th:text="${film.getAnnee()}" />
-        <td th:text="${film.getNom()}" />
-        <td th:text="${film.getRealisateur().getPrenom()} + ' ' + ${film.getRealisateur().getNom()}" />
-        <td>
-            <a th:href="@{./films/detail(id=${film.id})}">Détails</a>
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>Genre</th>
+            <th>Année</th>
+            <th>Titre</th>
+            <th>Réalisateur</th>
+            <th>Action</th>
+        </tr>
+        <tr data-th-each="film: ${films}">
+            <td data-th-text="${film.genre}"/>
+            <td data-th-text="${film.annee}"/>
+            <td data-th-text="${film.nom}"/>
+            <td data-th-text="${film.realisateur.prenom} + ' ' + ${film.realisateur.nom}"/>
+            <td>
+                <a data-th-href="@{./films/detail(id=${film.id})}">Détails</a>
+            </td>
+        </tr>
+    </table>
+    <a href="./nouveau-film"></a>
 </main>
 </body>
 </html>

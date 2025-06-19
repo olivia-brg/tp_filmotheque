@@ -1,0 +1,14 @@
+<!--    <div data-th-replace="~{fragments/fragment-form-film :: frag-form-film}"></div>-->
+<form action="/films/creer" data-th-fragment="frag-new-film" method="post">
+    <h1>Création d'un film [En cours de construction]</h1>
+    <ul class="flex-outer">
+        <li>
+            <label for="inputGenre">Genres : </label>
+            <select id="inputGenre">
+                <option data-th-each="genre:${genres}" data-th-value="${genre.getTitre()}" data-th-text="${genre.getTitre()}"
+                        name="genre"></option>
+            </select>
+        </li>
+    </ul>
+</form>
+

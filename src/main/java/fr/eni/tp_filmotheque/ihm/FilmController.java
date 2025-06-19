@@ -2,16 +2,16 @@ package fr.eni.tp_filmotheque.ihm;
 
 import fr.eni.tp_filmotheque.bll.FilmService;
 import fr.eni.tp_filmotheque.bo.Film;
+import fr.eni.tp_filmotheque.bo.Genre;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping({ "/","/films" })
+@SessionAttributes("genresEnSession")
 public class FilmController {
     FilmService filmService;
 
@@ -19,14 +19,14 @@ public class FilmController {
         this.filmService = filmService;
     }
 
-    @GetMapping({ "/","/films" })
+    @GetMapping
     public String afficherFilms(Model model) {
         List<Film> films = filmService.consulterFilms();
         model.addAttribute("films", films);
         return "index";
     }
 
-    @GetMapping("/films/detail")
+    @GetMapping("/detail")
     public String afficherUnFilm(@RequestParam(name="id") long id, Model model) {
         Film current = null;
         if (id > 0) {// L'identifiant en base commencera en 1
@@ -46,5 +46,34 @@ public class FilmController {
         }
     }
 
+    @PostMapping("/detail")
+    public String modifierFilm(@RequestParam(required = true) String genre,
+                               @RequestParam(required = true) String annee,
+                               @RequestParam(required = true) String nom,
+                               @RequestParam(required = true) String real,
+                               @RequestParam(required = true) int duree,
+                               @RequestParam(required = true) String acteur,
+                               @RequestParam(required = true) String synopsis){
+        System.out.println("Modification d'un film");
+        System.out.println("genre: "+genre);
+        System.out.println("annee: "+annee);
+        System.out.println("titre: "+nom);
+        System.out.println("realisateur: "+real);
+        System.out.println("duree: "+duree);
+        System.out.println("acteurs: "+ acteur);
+        System.out.println("synopsis: "+synopsis);
+        return "redirect:/films";
+    }
 
+    @ModelAttribute("genresEnSession")
+    public List<Genre> chargerGenres() {
+        System.out.println(filmService.consulterGenres());
+        return filmService.consulterGenres();
+    }
+
+    @GetMapping("/creer")
+    public String creerFilm(@ModelAttribute("genresEnSession") List<Genre> genres, Model model) {
+        model.addAttribute("genres", genres);
+        return "nouveau-film";
+    }
 }

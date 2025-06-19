@@ -45,7 +45,6 @@ public class Film implements Serializable {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -53,7 +52,6 @@ public class Film implements Serializable {
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -61,7 +59,6 @@ public class Film implements Serializable {
     public int getAnnee() {
         return annee;
     }
-
     public void setAnnee(int annee) {
         this.annee = annee;
     }
@@ -69,7 +66,6 @@ public class Film implements Serializable {
     public int getDuree() {
         return duree;
     }
-
     public void setDuree(int duree) {
         this.duree = duree;
     }
@@ -77,7 +73,6 @@ public class Film implements Serializable {
     public String getSynopsis() {
         return synopsis;
     }
-
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
@@ -85,7 +80,6 @@ public class Film implements Serializable {
     public List<Avis> getAvis() {
         return avis;
     }
-
     public void setAvis(Avis avis) {
         this.avis.add(avis);
         avis.setFilm(this);
@@ -94,17 +88,13 @@ public class Film implements Serializable {
     public Genre getGenre() {
         return genre;
     }
-
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
-
-
     public List<Personne> getActeurs() {
         return acteurs;
     }
-
     public void setActeurs(Personne acteur) {
         this.acteurs.add(acteur);
     }
@@ -112,7 +102,6 @@ public class Film implements Serializable {
     public Personne getRealisateur() {
         return realisateur;
     }
-
     public void setRealisateur(Personne realisateur) {
         this.realisateur = realisateur;
     }
